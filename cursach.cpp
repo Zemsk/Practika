@@ -31,7 +31,36 @@ void Setup() {
     score = 0;
 }
 
+void Pole() {
+    printf("Введите размер поля\n");
+    printf("Высота:");
+    scanf_s("%d", &height);
+    printf("Ширина:");
+    scanf_s("%d", &width);
+}
 
+void Recordivivod1() {
+    char arr[N];
+    rec = fopen("Score.txt", "r");
+    while (fgets(arr, N, rec) != NULL)
+        printf("%s", arr);
+    printf("\n");
+    fclose(rec);
+}
+
+void Recordivvod() {
+    rec = fopen("Score.txt", "a");
+    printf("Введите имя игрока:\n");
+    scanf("%s", &name);
+    fprintf(rec, "Игрок %s", name);
+    fclose(rec);
+}
+
+void Recordivivod2() {
+    rec = fopen("Score.txt", "a");
+    fprintf(rec, " Счет %d\n", score);
+    fclose(rec);
+}
 
 void Draw() {
     system("cls");
