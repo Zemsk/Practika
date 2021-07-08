@@ -21,6 +21,16 @@ eDirection dir;
 FILE* rec;
 char name[N];
 
+void Setup() {
+    gameover = false;
+    dir = Stop;
+    sx = width / 2 - 1;
+    sy = height / 2 - 1;
+    fruitX = rand() % width;
+    fruitY = rand() % height;
+    score = 0;
+}
+
 
 
 
