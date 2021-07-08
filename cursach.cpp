@@ -68,7 +68,28 @@ void Draw() {
     printf("Очки:%d\n", score);
 }
 
-
+void Input() {
+    if (_kbhit()) {
+        switch (_getch())
+        {
+        case 'a':
+            dir = Left;
+            break;
+        case 'd':
+            dir = Right;
+            break;
+        case 'w':
+            dir = Up;
+            break;
+        case 's':
+            dir = Down;
+            break;
+        case KEY_ESC:
+            gameover = true;
+            break;
+        }
+    }
+}
 
 void Logic() {
     int prevX = tailX[0];
