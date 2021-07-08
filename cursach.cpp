@@ -33,6 +33,96 @@ void Setup() {
 
 
 
+void Draw() {
+    system("cls");
+    for (int i = 0; i < width + 1; i++)
+        printf("#");
+    printf("\n");
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (j == 0 || j == width - 1)
+                printf("#");
+            if (i == sy && j == sx)
+                printf("@");
+            else if (i == fruitY && j == fruitX)
+                printf("f");
+            else {
+                bool print = false;
+                for (int k = 0; k < nTail; k++) {
+                    if (tailX[k] == j && tailY[k] == i) {
+                        print = true;
+                        printf("o");
+                    }
+                }
+                if (!print)
+                    printf(" ");
+            }
+        }
+        printf("\n");
+    }
+
+    for (int i = 0; i < width + 1; i++)
+        printf("#");
+    printf("\n");
+    printf("Очки:%d\n", score);
+}
+
+
+
+void Logic() {
+    int prevX = tailX[0];
+    int prevY = tailY[0];
+    int prev2X, prev2Y;
+    tailX[0] = sx;
+    tailY[0] = sy;
+    for (int i = 1; i < nTail; i++) {
+        prev2X = tailX[i];
+        prev2Y = tailY[i];
+        tailX[i] = prevX;
+        tailY[i] = prevY;
+        prevX = prev2X;
+        prevY = prev2Y;
+    }
+    switch (dir)
+    {
+    case Left:
+        sx--;
+        break;
+    case Right:
+        sx++;
+        break;
+    case Up:
+        sy--;
+        break;
+    case Down:
+        sy++;
+        break;
+    }
+
+    if (sx >= width - 1)
+        sx = 0;
+    else if (sx < 0)
+        sx = width - 2;
+    if (sy >= width)
+        sy = 0;
+    else if (sy < 0)
+        sy = height - 1;
+
+    for (int i = 0; i < nTail; i++) {
+        if (tailX[i] == sx && tailY[i] == sy)
+            gameover = true;
+    }
+
+    if (sx == fruitX && sy == fruitY) {
+        score += 10;
+        fruitX = rand() % width;
+        fruitY = rand() % height;
+        nTail++;
+    }
+}
+
+
 
 int main() {
     HWND hwnd = GetConsoleWindow();
