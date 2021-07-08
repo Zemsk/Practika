@@ -172,7 +172,47 @@ void Logic() {
     }
 }
 
-
+void gamemenu() //игровое меню
+{
+    int p = 1, c = 0;
+    const char* GAME_MENU =
+        "\t 1. Игра\n"
+        "\t 2. Игроки\n"
+        "\t 3. Выход";
+    system("cls"); printf("%s", GAME_MENU);
+    while (TRUE) //навигация по меню
+    {
+        c = _getch();
+        switch (c)
+        {
+        case '1':
+        case '2':
+        case '3':
+            p = c - '0';
+        case KEY_ENTER:
+            switch (p)
+            {
+            case 1:
+                system("cls");
+                Pole();
+                Recordivvod();
+                Setup();
+                return;
+            case 2:
+                system("cls");
+                Recordivivod1();
+                _getch();
+                break;
+            case 3:
+                system("cls");
+                exit(0);
+            }
+            system("cls"); printf("%s", GAME_MENU);
+            p = 1;
+            break;
+        }
+    }
+}
 
 int main() {
     HWND hwnd = GetConsoleWindow();
